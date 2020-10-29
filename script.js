@@ -9,21 +9,18 @@ let confirmNumbers = "123456789".split();
 
 function generatePassword(){
 
-    
+    userName = parseInt(prompt ("How many characters do you want?"))
 
     lowerCaseArray = confirm("Will this contain lowercase letters?");
     upperCaseArray = confirm("Will this contain uppercase letters?");
     specialCharArray = confirm("Will this contain special characters?");
     numberArray = confirm("Will this contain numbers?");
-    userName = parseInt(prompt ("How many characters do you want?"))
+    
 
     if (userName < 6 || userName > 290 || isNaN(userName)) {
         alert ("Please choose betweeen 6 - 290 characters")
     
-    } else if (confirmLower !== true && confirmUpper !== true && confirmNumbers !== true && confirmSpecial !== true){
-        console.log(generatePassword)
-
-    }
+    } 
 
 }; generatePassword()
 
