@@ -7,10 +7,7 @@ In this repository Javascript shows how its key within software development. If 
 
 
 
- 
 
-
-![](Screen Shot.png)
 
 
 

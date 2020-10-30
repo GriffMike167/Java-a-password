@@ -28,7 +28,7 @@ function generatePassword(){
 
 function writePassword() {
     
-    var passwordPool = [];
+    let passwordPool = [];
     console.log(passwordPool)
 
 
@@ -81,11 +81,11 @@ else if (confirmUpper) {
    
 
 
-    var finalPassword = [];
+    let finalPassword = [];
 
     for (let i = 0; i < userName; i++) {
         var randomPassword = Math.floor(Math.random(confirmLower[i] + confirmUpper[i] + confirmNumbers[i] + confirmSpecial[i])) + 1;
-        finalPassword.push(passwordPool[randomPassword])
+        finalPassword.join(passwordPool[randomPassword])
         
         
         
