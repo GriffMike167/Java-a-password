@@ -38,7 +38,7 @@ if (confirmSpecial && confirmNumbers && confirmLower && confirmUpper) {
 // Else if for 3 positive options
 else if (confirmSpecial && confirmNumbers && confirmLower) {
     choices = confirmSpecial.concat(confirmNumbers, confirmLower);{
-    passwordPool.push(onlyconfirmSpecial[i] + confirmNumber[i] + confirmlower[i])}
+    passwordPool.join(onlyconfirmSpecial[i] + confirmNumber[i] + confirmlower[i])}
 }
 else if (confirmSpecial && confirmNumbers && confirmUpper) {
     choices = confirmSpecial.concat(confirmNumbers, confirmUpper);
