@@ -1,102 +1,132 @@
-var generatePasswordButton = document.getElementById("generate");
-var copyToClipBoardButton = document.getElementById("copytoclipboard");
+// worked with tutor on redoing the assignemt based of notes taken throughout the week
+// made changes to clean up and simplify for loops 
+// made changes to copy to clipboard function to disply inside generator 
+// made changes to arrary to simplify how it looks to read easier
+// renamed variables to beable to follow if/else and functions easier
+// tutor suggested doing it exactly how was shown as simply as possible instead 
+// of trying to do too much 
 
-let confirmLower = "abcdefghijklmnopqrstuvwxyz".split();
-let confirmUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split();
-let confirmSpecial = "!@#$%^&*()<>?+=".split();
-let confirmNumbers = "123456789".split();
+
+
+
+
+
+let generatePasswordButton = document.getElementById("generate");
+
+
+let pickLower = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",];
+let pickUpper = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",];
+let pickSpecial = ['!','@','#','$','%','^','&','*','<','>','?','+',];
+let pickNumbers = ["1","2","3","4","5","6","7","8","9",]
 
 
 function generatePassword(){
 
-    userName = parseInt(prompt ("How many characters do you want?"))
+    userPassword = parseInt(prompt ("How many characters do you want?"))
 
-    lowerCaseArray = confirm("Will this contain lowercase letters?");
-    upperCaseArray = confirm("Will this contain uppercase letters?");
-    specialCharArray = confirm("Will this contain special characters?");
-    numberArray = confirm("Will this contain numbers?");
     
-
-    if (userName < 6 || userName > 290 || isNaN(userName)) {
-        alert ("Please choose betweeen 6 - 290 characters")
+    if (userPassword < 6) {
+        alert ("Please choose at least 6!"); return;
     
     } 
+    if (userPassword > 240) {
+        alert ("Please choose less that 240!"); return;
+    }
 
-}; generatePassword()
+    let lowerCaseQuestion = confirm("Will this contain lowercase letters?");
+    let upperCaseQuestion = confirm("Will this contain uppercase letters?");
+    let specialCharQuestion = confirm("Will this contain special characters?");
+    let numberQuestion = confirm("Will this contain numbers?");
+
+    if (specialCharQuestion && numberQuestion && lowerCaseQuestion && upperCaseQuestion === false) {
+        alert("You must choose at least one character choice!"); return;
+    }
+
+    let questionOptions = {
+        length: userPassword,
+        specialCharactrers: specialCharQuestion,
+        numeric: numberQuestion,
+        lowerCase: lowerCaseQuestion,
+        upperCase: upperCaseQuestion
+    }
+
+    return questionOptions;
+}
 
 
 
 function writePassword() {
     
+    let options = generatePassword();
+    console.log(options)
+    
     let passwordPool = [];
     console.log(passwordPool)
 
 
-if (confirmSpecial && confirmNumbers && confirmLower && confirmUpper) {
-    choices = confirmSpecial.concat(confirmNumbers, confirmLower, confirmUpper);
-}
-// Else if for 3 positive options
-else if (confirmSpecial && confirmNumbers && confirmLower) {
-    choices = confirmSpecial.concat(confirmNumbers, confirmLower);{
-    passwordPool.join(onlyconfirmSpecial[i] + confirmNumber[i] + confirmlower[i])}
-}
-else if (confirmSpecial && confirmNumbers && confirmUpper) {
-    choices = confirmSpecial.concat(confirmNumbers, confirmUpper);
-}
-else if (confirmSpecial && confirmLower && confirmUpper) {
-    choices = confirmSpecial.concat(confirmLower, confirmUpper);
-}
-else if (confirmNumbers && confirmLower && confirmUpper) {
-    choices = confirmNumbers.concat(confirmLower, confirmUpper);
-}
-// Else if for 2 positive options 
-else if (confirmSpecial && confirmNumbers) {
-    choices = confirmSpecial.concat(confirmNumbers);
-} else if (confirmSpecial && confirmLower) {
-    choices = confirmSpecial.concat(confirmLower);
-} else if (confirmSpecial && upperCaseArray) {
-    choices = confirmSpecial.concat(confirmUpper);
-}
-else if (confirmNumbers && confirmlower) {
-    choices = confirmNumbers.concat(confirmLower);
-} else if (confirmNumbers && confirmUpper) {
-    choices = confirmNumbers.concat(confirmUpper);
-} else if (confirmLower && confirmUpper) {
-    choices = confirmLower.concat(confirmUpper);
-}
-// Else if for 1 positive option
-else if (confirmSpecial) {
-    choices = confirmSpecial;
-}
-else if (confirmNumbers) {
-    choices = confirmNumber;
-}
-else if (confirmLower) {
-    choices = confirmLower;
-}
-else if (confirmUpper) {
-    choices = confirmUpper;
-    
-}; console.log(writePassword)
-   
+    if (options.specialCharactrers) {
+        for (let i = 0; i < pickSpecial.length; ++i) {
+            passwordPool.push(pickSpecial[i]);
+            
+        }
+    }
 
+    if (options.numeric) {
+        for (let i = 0; i < pickNumbers.length; ++i) {
+            passwordPool.push(pickNumbers[i]);
+            
+        }
+    }
+
+    if (options.lowerCase) {
+        for (let i = 0; i < pickLower.length; ++i) {
+            passwordPool.push(pickLower[i]);
+            
+        }
+    }
+
+    if (options.upperCase) {
+        for (let i = 0; i < pickUpper.length; ++i) {
+            passwordPool.push(pickUpper[i]);
+            
+        }
+    }
 
     let finalPassword = [];
 
-    for (let i = 0; i < userName; i++) {
-        var randomPassword = Math.floor(Math.random(confirmLower[i] + confirmUpper[i] + confirmNumbers[i] + confirmSpecial[i])) + 1;
-        finalPassword.join(passwordPool[randomPassword])
+    for (let i = 0; i < userPassword; ++i) {
+        let randomPassword = Math.floor(Math.random() * Math.floor(passwordPool.length))
+        finalPassword.push(passwordPool[randomPassword])
+    }
         
         
-        
-        console.log(randomPassword)
+    console.log(finalPassword)
+
+    let lastFinal = finalPassword.join('');
+    console.log(lastFinal)
+
+    document.getElementById("display").textContent = lastFinal;
 
         
         
-    }
-};  writePassword() 
+} 
+    let password = "";
+
+function copytoClipboard() {
+    
+    let passwordText = document.getElementById("display");
+    
+    password = writePassword();
+
+    passwordText.value = password;
+
+
+    
+}
+
+ generatePasswordButton = document.addEventListener("click", writePassword);
+ 
+
+
       
 
-function UserInput(ps) {
-  document.getElementById("password").textContent = ps;
-}
